@@ -1,0 +1,31 @@
+As a general user I want to send messages to other users directly to communicate.
+
+As a general user I want to send messages to a channel to communicate with a group.
+
+As a general user I want to have a profile to share personal info with other users.
+
+As a general user I want to be able to change my profile picture to share a more up to date visual of myself.
+
+As a general user I want to be able to login to the app so that I can message others with my username.
+
+As a general user I want to be able to logout of the app so that no one can send messages under my username.
+
+As a general user I want timestamps attached to messages so I know when they were sent.
+
+As a general user I want to set up group conversations to communicate with a specific group of people.
+
+As a general user I want to set my status so that other users will know how I'm feeling/doing.
+
+As a general user I want to block users so that I don't have to see their messages.
+
+As a general user I want to search for other users to message them.
+
+As a general user I want to be able add attachments to my messages so that I can share files with other users.
+
+As a general user I want to be able to "like" a message to share how I feel about it.
+
+As a general user I want to be able to share a message to show it to another user.
+
+As a general user I want to be able to forward a message to other users to share with it with them.
+
+As a general user I want my passwords to be encrypted so that my user data is safe.

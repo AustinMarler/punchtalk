@@ -1,0 +1,31 @@
+As a general user I want to make video calls with other users to be able to communicate while seeing and talking to each other.
+
+As a general user I want to be able to ping other users using @ to bring their attention to another message.
+
+As a general user I want to see a preview of links embedded in a message if they are pictures or videos so that I know what the link is referring to before clicking on it.
+
+As a general user I want keyboard shortcuts so that I can quickly use features in the app.
+
+As a general user I want to have masks for video chat to either block faces for privacy or to have fun with other users.
+
+As a general user I want a mobile version of the messaging app so I can use the app on the go.
+
+As a general user I want profile scoring so that I know how much better or worse I am than other users.
+
+As a general user I want location tagging so I know where a user was when they sent a message or so I know the location of a picture that was taken and posted.
+
+As a general user I want a feed so I know what my friends/contacts have been up to lately.
+
+As a general user I want to send invitations to other users to join channels I've created.
+
+As a general user I want to be able to directly link what I've been watching on Netflix through a connection so that I can share my interests with other users.
+
+As a general user I want to have a place on my user profile to share my favorite music so that other users know my interests.
+
+As a general user I want a drunk filter so that I will be at less risk of posting bad posts while drunk.
+
+As a general user I want two-factor authentication so that my user profile is more secure.
+
+As a general user I want an emergency button so that if something goes wrong I can quickly and easily reach emergency services.
+
+As a general user I want a "snapchat delete timer" feature that will allow me to optionally have a message delete itself after a set amount of time so that sensitive or private information/messages will have less chance of leaking.

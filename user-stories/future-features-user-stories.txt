@@ -1,0 +1,27 @@
+As a general user I want to be able to set myself to do not disturb so that others do not disturb me.
+
+As a general user I want to be able to see if another user is online so that I know whether or not I can message them.
+
+As a general user I want to be able to use emojis because I want to participate in the destruction of modern language.
+
+As a general user I want themes for the app or for my profile to show my personality and make me more comfortable.
+
+As a general user I want custom sounds for my app to show my personality.
+
+As a general user I want to style messages to show my personality and possibly help organize them.
+
+As a general user I want to have the ability to set user privileges for channels that I've created so that only certain users have control of how the channel operates.
+
+As a general user I want notifications so I know when things are happening.
+
+As a general user I want a contact list so I don't have to remember the usernames and other info of those that I contact often.
+
+As a general user I want to be able to favorite people and channels so that I can more easily find them later.
+
+As a general user I want to be able to pin messages so that they are more easily findable later.
+
+As a general user I want to be able to search through channels and messages for specific words and phrases to find a message.
+
+As a general user I want to have a spoiler mask as an option when creating message so that I and other users can hide spoilers for movies and TV shows.
+
+As a general user I want to change my status to invisible so that no one knows I'm online.

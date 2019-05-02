@@ -1,0 +1,16 @@
+MVP:
+Send messages to other users directly
+Send messages to a channel
+Have a profile
+Change profile picture
+Login / Logout
+timestamps on messages
+group convos
+setting a status
+Blocking users
+search users
+attachments
+like button
+share button
+forwarding messages
+encryption

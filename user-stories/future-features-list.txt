@@ -1,0 +1,15 @@
+Future Features:
+Do not disturb
+See if user is online
+Emojis
+themes
+custom sounds
+styling messages
+user privileges per channel
+notifications
+contact list
+favorite people or channels
+pinned messages
+searching through channels for messages
+spoiler mask
+invisible
