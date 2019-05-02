@@ -1,0 +1,10 @@
+{
+  "db": {
+    "hostname": "localhost",
+    "username": "punchtalk-user",
+    "password": "k.y:YFX%pCav-MMnymBAnAP-pJ9Wcb",
+    "database": "punchtalk-db"
+  },
+  "secret": "Z47U39S586bWH;7R79U!5q7r795n3S",
+  "salt": "4u;:52zWGu%A55x636*85e2*c!YNAK"
+}
