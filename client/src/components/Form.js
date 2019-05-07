@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { send } from '../actions/actions'
+import { sendMessage } from '../actions/actions'
 
 class Form extends Component {
   state = {
@@ -15,7 +15,7 @@ class Form extends Component {
 
   sendMessage = (e) => {
     e.preventDefault()
-    send(this.state.message)
+    sendMessage(this.state.message)
     this.setState({
       message: ''
     })
@@ -25,7 +25,7 @@ class Form extends Component {
     return (
       <div>
         <form onSubmit={this.sendMessage}>
-          <input type="text" name="message" id="message" placeholder="message" value={this.state.text} onChange={this.handleChange} />
+          <input type="text" name="message" id="message" placeholder="message" value={this.state.message} onChange={this.handleChange} />
           <button type="submit">Send</button>
         </form>
       </div>

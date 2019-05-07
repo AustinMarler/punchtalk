@@ -1,9 +1,9 @@
 import store from '../store'
 import io from 'socket.io-client'
 
-const socket = io.connect("http://10.68.0.155:3001");
+const socket = io.connect("http://localhost:3001");
 
-export function send(text) {
+export function sendMessage(text) {
   socket.emit("new message", text);
 }
 

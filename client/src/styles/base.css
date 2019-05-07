@@ -1,0 +1,73 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 1012px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.margin-top-24px {
+  margin-top: 24px;
+}
+
+.margin-bottom-24px {
+  margin-bottom: 24px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+div.bold-font h1 {
+  font-weight: bold;
+}
+
+#punch-green-rec {
+  width: 20px;
+  height: 50px;
+  margin-left: 3px;
+  background-color: rgb(115, 255, 120);
+}
+
+.welcome-box-header {
+  align-items: center;
+}
+
+.welcome-login-button, .welcome-register-button {
+  width: 100%;
+}
+
+main div {
+  position: relative;
+}
+
+.back-button-container {
+  position: absolute;
+  left: 0;
+}
