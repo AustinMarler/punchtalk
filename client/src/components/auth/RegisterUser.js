@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -8,10 +8,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import CreateIcon from '@material-ui/icons/Create';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+
+import { AuthContext } from '../../lib/Auth'
 
 const styles = theme => ({
   main: {
@@ -45,8 +47,33 @@ const styles = theme => ({
   },
 });
 
-function UserLogin(props) {
+function RegisterUser(props) {
   const { classes } = props;
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirm] = useState('')
+  const [userError, setUserError] = useState(false)
+  const [passError, setPassError] = useState(false)
+  const [errorText, setErrorText] = useState('')
+  const { register } = useContext(AuthContext)
+
+  function sendRegister(e) {
+    e.preventDefault()
+    if (password === confirmPassword) {
+      setPassError(false)
+      register(username, password)
+        .then(() => {
+          props.history.push("/channel")
+        })
+        .catch(err => {
+          setUserError(true)
+          setErrorText(err)
+        })
+    } else {
+      setPassError(true)
+      setErrorText("Passwords must match")
+    }
+  }
 
   return (
     <main className={classes.main}>
@@ -58,49 +85,46 @@ function UserLogin(props) {
           </IconButton>
         </div>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <CreateIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Login
+          Register
         </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
+        <form className={classes.form} onSubmit={sendRegister}>
+          {userError || passError ? (
+            <Typography color="error">{errorText}</Typography>
+          ) : (
+            ''
+          )}
+          <FormControl error={userError} margin="normal" required fullWidth>
             <InputLabel htmlFor="username">Username</InputLabel>
-            <Input id="username" name="username" autoFocus />
+            <Input onChange={e => setUsername(e.target.value)} id="username" name="username" autoFocus />
           </FormControl>
-          <FormControl margin="normal" required fullWidth>
+          <FormControl error={passError} margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" />
+            <Input onChange={e => setPassword(e.target.value)} name="password" type="password" id="password" />
+          </FormControl>
+          <FormControl error={passError} margin="normal" required fullWidth>
+            <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+            <Input onChange={e => setConfirm(e.target.value)} name="confirmPassword" type="password" id="confirmPassword" />
           </FormControl>
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
           >
-            Login
+            Register
           </Button>
-          <div className="flex-row flex-justify-center margin-top-24px">or</div>
-          <div className="welcome-register-button" onClick={() => {props.history.push('/register-user')}}>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submit}
-            >
-              Register
-            </Button>
-          </div>
         </form>
       </Paper>
     </main>
   );
 }
 
-UserLogin.propTypes = {
+RegisterUser.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(UserLogin);
+export default withStyles(styles)(RegisterUser);

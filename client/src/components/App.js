@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import store from '../store'
 import '../styles/base.css'
-import { Authentication as AuthProvider, AuthRoute } from '../lib/Authentication'
+import { AuthProvider, AuthRoute } from '../lib/Auth'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import Welcome from './Welcome';
-import UserLogin from './UserLogin';
-import RegisterUser from './RegisterUser';
-import Channel from './Channel';
+import Welcome from './auth/Welcome';
+import UserLogin from './auth/UserLogin';
+import RegisterUser from './auth/RegisterUser';
+import Channel from './chat/Channel';
 
 class App extends Component {
   render() {

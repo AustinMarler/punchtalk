@@ -1,7 +1,11 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
-import reducer from './reducers/reducers'
+import chatReducer from './reducers/chatReducer'
 
-const store = createStore(reducer)
+const rootReducer = combineReducers({
+  chatReducer: chatReducer
+})
+
+const store = createStore(rootReducer)
 
 export default store

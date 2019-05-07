@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { sendMessage } from '../actions/actions'
+import { sendMessage } from '../../actions/chat'
 
 class Form extends Component {
   state = {

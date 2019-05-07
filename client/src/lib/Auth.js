@@ -1,117 +1,119 @@
-// Borrowed from past PunchCode project
-
 import { decode } from 'jsonwebtoken'
+import React, { useState, useContext } from 'react'
+import { Route, Redirect } from 'react-router-dom'
+import axios from 'axios'
 
-class AuthService {
-	constructor(config = {}) {
-		this.domain = config.domain || '/api'
-		this.authPath = config.authPath || 'user-login'
-		this.registerPath = config.registerPath || 'register-user'
-	}
-
-	login = (username, password) => {
-		this.logout()
-		return this.fetch(`${this.domain}/${this.authPath}`, {
-			method: 'POST',
-			body: JSON.stringify({
-				username, password
-			})
-		}).then(data => {
-			this.setToken(data.token)
-			return Promise.resolve(data)
-		})
-	}
-
-	logout = () => {
-		localStorage.removeItem('authtoken')
-	}
-
-	loggedIn = () => {
-		const token = this.getToken()
-		return !!token && !this.isTokenExpired(token)
-	}
-
-	isTokenExpired = (token) => {
-		try {
-			const decoded = decode(token)
-			return decoded.exp < Date.now() / 1000
-		} catch (err) {
-			return false
-		}
-	}
-
-	setToken = (token) => {
-		localStorage.setItem('authtoken', token)
-	}
-
-	getToken = () => {
-		return localStorage.getItem('authtoken')
-	}
-
-	getProfile = () => {
-		return decode(this.getToken())
-	}
-
-	get = (url) => {
-		return this.fetch(url, {
-			method: 'GET'
-		})
-	}
-
-	put = (url, data) => {
-		return this.fetch(url, {
-			method: 'PUT',
-			body: JSON.stringify(data)
-		})
-	}
-
-	post = (url, data) => {
-		return this.fetch(url, {
-			method: 'POST',
-			body: JSON.stringify(data)
-		})
-	}
-
-	patch = (url, data) => {
-		return this.fetch(url, {
-			method: 'PATCH',
-			body: JSON.stringify(data)
-		})
-	}
-
-	delete = (url) => {
-		return this.fetch(url, {
-			method: 'DELETE'
-		})
-	}
-
-	fetch = (url, options) => {
-		const headers = {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		}
-
-		if (this.loggedIn()) {
-			headers['Authorization'] = 'Bearer ' + this.getToken()
-		}
-
-		return fetch(url, {
-			headers,
-			...options
-		})
-		.then(this._checkStatus)
-		.then(response => response.json())
-	}
-
-	_checkStatus = (response) => {
-		if (response.status >= 200 && response.status < 300) {
-			return response
-		} else {
-			const error = new Error(response.statusText)
-			error.response = response
-			throw error
-		}
-	}
+function isLoggedIn() {
+  const token = localStorage.getItem('authtoken')
+  return !!token && !isTokenExpired(token)
 }
 
-export default AuthService
+function isTokenExpired(token) {
+  try {
+    const decoded = decode(token)
+    return decoded.exp < Date.now() / 1000
+  } catch (err) {
+    return false
+  }
+}
+
+function getUser() {
+  try {
+    const token = localStorage.getItem('authtoken')
+    const decoded = decode(token)
+    return decoded.username
+  } catch (err) {
+    return null
+  }
+}
+
+const initialContext = {
+  isAuthenticated: false,
+  redirectUrl: '/user-login',
+  user: null
+}
+
+export const AuthContext = React.createContext(initialContext)
+
+export const AuthProvider = props => {
+  const [isAuthenticated, setAuthenticated] = useState(isLoggedIn())
+  const [user, setUser] = useState(getUser())
+
+  function signin(username, password) {
+    return new Promise((resolve, reject) => {
+      axios
+        .post('/api/user-login', { username, password })
+        .then(resp => {
+          const token = resp.data.token
+          axios.defaults.headers.common.Authorization = 'Bearer ' + token
+          window.localStorage.setItem('authtoken', token)
+          setUser(getUser())
+          setAuthenticated(true)
+          resolve()
+        })
+        .catch(err => {
+          const error = err.response.data.error
+          reject(error)
+        })
+    })
+  }
+
+  function register(username, password) {
+    return new Promise((resolve, reject) => {
+      axios
+        .post('/api/register-user', { username, password })
+        .then(resp => {
+          const token = resp.data.token
+          axios.defaults.headers.common.Authorization = 'Bearer ' + token
+          setUser(getUser())
+          setAuthenticated(true)
+          resolve()
+        })
+        .catch(err => {
+          const error = err.response.data.error
+          reject(error)
+        })
+    })
+  }
+
+  function signout() {
+    return new Promise((resolve, reject) => {
+      axios.defaults.headers.common.Authorization = null
+      window.localStorage.removeItem('authtoken')
+      setAuthenticated(false)
+      resolve()
+    })
+  }
+
+  const value = {
+    isAuthenticated: isAuthenticated,
+    user: user,
+    redirectUrl: props.redirectUrl || '/user-login',
+    signin: signin,
+    register: register,
+    signout: signout
+  }
+
+  return (
+    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
+  )
+}
+
+export const AuthRoute = ({ component: Component, ...rest }) => {
+  const auth = useContext(AuthContext)
+
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        auth.isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: auth.redirectUrl, state: { from: props.location } }}
+          />
+        )
+      }
+    />
+  )
+}

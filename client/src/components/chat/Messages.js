@@ -14,8 +14,9 @@ class Messages extends Component {
 }
 
 function mapStateToProps(appState) {
+  console.log(appState)
   return {
-    messages: appState.messages
+    messages: appState.chatReducer.messages
   }
 }
 

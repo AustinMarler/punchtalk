@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -8,10 +8,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import CreateIcon from '@material-ui/icons/Create';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { AuthContext } from "../../lib/Auth"
 
 const styles = theme => ({
   main: {
@@ -45,8 +46,26 @@ const styles = theme => ({
   },
 });
 
-function RegisterUser(props) {
+function UserLogin(props) {
   const { classes } = props;
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
+  const [errorText, setErrorText] = useState('')
+  const { signin } = useContext(AuthContext)
+
+  function sendLogin(e) {
+    e.preventDefault()
+
+    signin(username, password)
+      .then(() => {
+        props.history.push("/channel")
+      })
+      .catch(err => {
+        setError(true)
+        setErrorText(err)
+      })
+  }
 
   return (
     <main className={classes.main}>
@@ -58,41 +77,50 @@ function RegisterUser(props) {
           </IconButton>
         </div>
         <Avatar className={classes.avatar}>
-          <CreateIcon />
+          <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Register
+          Login
         </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
+        <form onSubmit={sendLogin} className={classes.form}>
+          {error ? <Typography color="error">{errorText}</Typography> : ""}
+          <FormControl error={error} margin="normal" required fullWidth>
             <InputLabel htmlFor="username">Username</InputLabel>
-            <Input id="username" name="username" autoFocus />
+            <Input onChange={e => setUsername(e.target.value)} id="username" name="username" autoFocus />
           </FormControl>
-          <FormControl margin="normal" required fullWidth>
+          <FormControl error={error} margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
-            <Input name="confirmPassword" type="password" id="confirmPassword" />
+            <Input onChange={e => setPassword(e.target.value)} name="password" type="password" id="password" />
           </FormControl>
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="secondary"
+            color="primary"
             className={classes.submit}
           >
-            Register
+            Login
           </Button>
+          <div className="flex-row flex-justify-center margin-top-24px">or</div>
+          <div className="welcome-register-button" onClick={() => {props.history.push('/register-user')}}>
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Register
+            </Button>
+          </div>
         </form>
       </Paper>
     </main>
   );
 }
 
-RegisterUser.propTypes = {
+UserLogin.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(RegisterUser);
+export default withStyles(styles)(UserLogin);
