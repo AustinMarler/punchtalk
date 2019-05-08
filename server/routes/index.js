@@ -69,4 +69,17 @@ router.post('/user-login', (req, res, next) => {
   })
 })
 
+router.patch('/profile-image', (req, res, next) => {
+
+  console.log(req.body)
+  const profile_image = req.body.profile_image
+  const username = req.body.username
+
+  const sql = `
+  UPDATE users
+  SET profile_image = ?
+  WHERE username = ?
+  `
+})
+
 module.exports = router;
