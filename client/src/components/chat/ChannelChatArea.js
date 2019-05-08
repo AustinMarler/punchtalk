@@ -52,14 +52,12 @@ function ChannelChatArea (props) {
       <ul className="flex-column">
         <Grid item xs={12} md={6}>
           <div className={classes.demo}>
-            <List dense={true}>
+            <List dense={false}>
               {messages.map((message, i) => (
-                <ListItem key={"message" + i}>
-                  <ListItemText
-                    primary={message.user + ":"}
-                    secondary={message.message}
-                  />
-                </ListItem>
+                <div className="message-container" key={"message" + i}>
+                  <p className="message-username">{message.user}: <span className="message-timestamp">{message.timestamp}</span></p>
+                  <p className="message-text">{message.message}</p>
+                </div>
               ))}
             </List>
           </div>
