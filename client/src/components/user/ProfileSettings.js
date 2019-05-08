@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -67,14 +68,12 @@ function ProfileSettings (props) {
 
   function handleSubmit (e) {
     e.preventDefault()
-    console.log("handlesubmit")
     if (profilePicURL !== '') {
       changeProfilePic({ username: user.username, profile_image: profilePicURL })
     }
-    if (password === confirmPassword && newPassword === confirmNewPassword) {
+    if (password !== '' && newPassword !== '' && password === confirmPassword && newPassword === confirmNewPassword) {
       changePassword({ username: user.username, currentPassword: password, newPassword })
     }
-    props.history.push('/channel')
   }
 
   return (
@@ -137,6 +136,15 @@ function ProfileSettings (props) {
               margin="normal"
               variant="outlined"
             />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Submit
+            </Button>
           </form>
         </Paper>
       </main>

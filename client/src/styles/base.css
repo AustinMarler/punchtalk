@@ -87,6 +87,7 @@ main div {
   justify-content: space-between;
   padding: 5px;
   min-width: 1000px;
+  height: 62px;
 }
 
 #channel-list-container {
@@ -96,7 +97,7 @@ main div {
 }
 
 #channel-content {
-  height: 90%;
+  height: calc(100% - 62px);
 }
 
 #channel-content > div {

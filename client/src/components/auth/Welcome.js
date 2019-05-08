@@ -42,45 +42,47 @@ function Welcome(props) {
   const { classes } = props;
 
   return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <div className="welcome-box-header flex-column margin-bottom-24px">
-          <Typography component="h1" variant="h5">
-            Welcome to
-          </Typography>
-          <div className="flex-row bold-font">
-            <Typography component="h1" variant="h3">
-              PUNCHTALK
+    <div id="welcome-page-container">
+      <main className={classes.main}>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <div className="welcome-box-header flex-column margin-bottom-24px">
+            <Typography component="h1" variant="h5">
+              Welcome to
             </Typography>
-            <div id="punch-green-rec"></div>
+            <div className="flex-row bold-font">
+              <Typography component="h1" variant="h3">
+                PUNCHTALK
+              </Typography>
+              <div id="punch-green-rec"></div>
+            </div>
           </div>
-        </div>
-        <div className="welcome-login-button" onClick={() => {props.history.push('/user-login')}}>
-          <Button
-            type="button"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Login
-          </Button>
-        </div>
-        <div className="align-center margin-top-24px">or</div>
-        <div className="welcome-register-button" onClick={() => {props.history.push('/register-user')}}>
-          <Button
-            type="button"
-            fullWidth
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
-          >
-            Register
-          </Button>
-        </div>
-      </Paper>
-    </main>
+          <div className="welcome-login-button" onClick={() => {props.history.push('/user-login')}}>
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Login
+            </Button>
+          </div>
+          <div className="align-center margin-top-24px">or</div>
+          <div className="welcome-register-button" onClick={() => {props.history.push('/register-user')}}>
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Register
+            </Button>
+          </div>
+        </Paper>
+      </main>
+    </div>
   );
 }
 

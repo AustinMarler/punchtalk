@@ -69,9 +69,7 @@ router.post('/user-login', (req, res, next) => {
   })
 })
 
-router.patch('/profile-image', (req, res, next) => {
-
-  console.log(req.body)
+router.patch('/change-profile-image', (req, res, next) => {
   const profile_image = req.body.profile_image
   const username = req.body.username
 
@@ -80,6 +78,55 @@ router.patch('/profile-image', (req, res, next) => {
   SET profile_image = ?
   WHERE username = ?
   `
+
+  conn.query(sql, [profile_image, username], (err, results, fields) => {
+    if (err) {
+      throw new Error('profile image change failed')
+    } else {
+      const token = jwt.sign({ username, profileImage }, config.get('secret'))
+      res.json({
+        token
+      })
+    }
+  })
+})
+
+router.patch('/change-password', (req, res, next) => {
+  const username = req.body.username
+  const currentPassword = sha512(req.body.currentPassword + config.get('salt'))
+  const newPassword = sha512(req.body.newPassword + config.get('salt'))
+
+  const sql = `
+  SELECT count(1) as count
+  FROM users
+  WHERE username = ? AND password = ?
+  `
+
+  conn.query(sql, [username, currentPassword], (err, results, fields) => {
+    const count = results[0].count
+
+    if (count >= 1) {
+      const sql = `
+      UPDATE users
+      SET password = ?
+      WHERE username = ?
+      `
+
+      conn.query(sql, [newPassword, username], (err, results, fields) => {
+        if (err) {
+          throw new Error('password change failed')
+        } else {
+          res.json({
+            message: 'Password change success'
+          })
+        }
+      })
+    } else {
+      res.status(401).json({
+        message: 'Incorrect password'
+      })
+    }
+  })
 })
 
 module.exports = router;
