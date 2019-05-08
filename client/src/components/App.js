@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import store from '../store'
-import '../styles/base.css'
-import { AuthProvider, AuthRoute } from '../lib/Auth'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import store from '../store';
+import '../styles/base.css';
+import { AuthProvider, AuthRoute } from '../lib/Auth';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Welcome from './auth/Welcome';
 import UserLogin from './auth/UserLogin';
@@ -32,4 +32,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;

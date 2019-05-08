@@ -59,7 +59,7 @@ function RegisterUser(props) {
 
   function sendRegister(e) {
     e.preventDefault()
-    if (password === confirmPassword) {
+    if (password === confirmPassword && username !== '') {
       setPassError(false)
       register(username, password)
         .then(() => {

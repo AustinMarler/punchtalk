@@ -71,3 +71,84 @@ main div {
   position: absolute;
   left: 0;
 }
+
+#channel-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+}
+
+#channel-header-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  min-width: 1000px;
+}
+
+#channel-list-container {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(156, 255, 160);
+}
+
+#channel-content {
+  height: 90%;
+}
+
+#channel-content > div {
+  align-items: stretch;
+}
+
+.channel-content-bar {
+  border-top: 1px solid lightgray;
+  width: 200px;
+  min-width: 200px;
+}
+
+#channel-center {
+  position: relative;
+  flex-grow: 1;
+  min-width: 600px;
+  border-top: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+
+#channel-chat-area-container {
+  height: 100%;
+  justify-content: flex-end;
+}
+
+#channel-chat-area-container ul {
+  height: auto;
+  max-height: 100%;
+  overflow: scroll;
+}
+
+#dummy-list-item {
+  list-style: none;
+  display: hidden;
+}
+
+#chat-input-area {
+  height: 35px;
+  border: 1px solid lightgray;
+  margin: 5px;
+}
+
+#message {
+  width: 90%;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+#chat-send-button {
+  width: 10%;
+  padding: 10px;
+  border: none;
+  border-left: 1px solid lightgray;
+}
