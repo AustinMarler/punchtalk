@@ -3,12 +3,9 @@ import { useSelector } from 'react-redux';
 import { sendMessage } from '../../actions/chat'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Grid from '@material-ui/core/Grid';
 import { AuthContext } from '../../lib/Auth';
 import moment from 'moment';
+import { isNull } from 'util';
 
 const styles = theme => ({
   root: {
@@ -25,7 +22,6 @@ const styles = theme => ({
 
 function ChannelChatArea (props) {
   const [message, setMessage] = useState('');
-  const { classes } = props;
   const { user } = useContext(AuthContext);
   const messages = useSelector(appstate => {
     return appstate.chatReducer.messages.map(message => ({
@@ -50,18 +46,17 @@ function ChannelChatArea (props) {
   return (
     <div id="channel-chat-area-container" className="flex-column">
       <ul className="flex-column">
-        <Grid item xs={12} md={6}>
-          <div className={classes.demo}>
-            <List dense={false}>
-              {messages.map((message, i) => (
-                <div className="message-container" key={"message" + i}>
-                  <p className="message-username">{message.user}: <span className="message-timestamp">{message.timestamp}</span></p>
-                  <p className="message-text">{message.message}</p>
-                </div>
-              ))}
-            </List>
-          </div>
-        </Grid>
+        {messages.map((message, i) => (
+          <li className="message-container flex-row" key={"message" + i}>
+            {!isNull(message.user.profileImage) 
+              ? <div className="profile-image-avatar" style={{backgroundImage: message.user.profileImage}}></div>
+              : <div className="profile-image-avatar" style={{backgroundImage: "url(https://www.naspp.com/App_Themes/NASPP/images/default_user.png"}}></div>}
+            <div className="message-content">
+              <p className="message-username">{message.user.username}: <span className="message-timestamp">{message.timestamp}</span></p>
+              <p className="message-text">{message.message}</p>
+            </div>
+          </li>
+        ))}
         <li id="dummy-list-item" ref={chatBottom}></li>
       </ul>
       <form id="chat-input-area" onSubmit={handleSubmit}>

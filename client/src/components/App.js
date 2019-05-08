@@ -9,6 +9,8 @@ import Welcome from './auth/Welcome';
 import UserLogin from './auth/UserLogin';
 import RegisterUser from './auth/RegisterUser';
 import Channel from './chat/Channel';
+import ProfileSettings from './user/ProfileSettings';
+import ProfilePage from './user/ProfilePage';
 
 class App extends Component {
   render() {
@@ -19,6 +21,8 @@ class App extends Component {
             <div>
               {/* private routes */}
               <AuthRoute exact path='/channel' component={Channel} />
+              <AuthRoute exact path='/profile-settings' component={ProfileSettings} />
+              <AuthRoute exact path='/profile-page' component={ProfilePage} />
 
               {/* public routes */}
               <Route exact path='/' component={Welcome} />

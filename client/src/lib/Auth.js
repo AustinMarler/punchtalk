@@ -21,7 +21,10 @@ function getUser() {
   try {
     const token = localStorage.getItem('authtoken')
     const decoded = decode(token)
-    return decoded.username
+    return {
+			username: decoded.username,
+			profileImage: decoded.profileImage
+		}
   } catch (err) {
     return null
   }

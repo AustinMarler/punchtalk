@@ -42,7 +42,7 @@ function Channel (props) {
           <div id="punch-green-rec"></div>
         </div>
         <div id="channel-logout-container">
-          <Button variant="contained" color="primary" className={classes.button}>
+          <Button onClick={() => props.history.push('/profile-settings')} variant="contained" color="primary" className={classes.button}>
             <SettingsIcon className={classes.leftIcon} />
             Settings
           </Button>

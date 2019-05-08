@@ -134,10 +134,27 @@ main div {
   display: hidden;
 }
 
+.message-content {
+  width: 92%;
+  min-width: 124px;
+}
+
+.profile-image-avatar {
+  display: inline-block;
+  border-radius: 50%;
+  width: 8%;
+  min-width: 64px;
+  height: 64px;
+  margin-right: 8px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .message-username {
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 6px;
+  margin: 6px 0;
 }
 
 .message-timestamp {
