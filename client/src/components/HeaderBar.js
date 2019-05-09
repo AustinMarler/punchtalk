@@ -5,19 +5,30 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import PeopleIcon from '@material-ui/icons/People';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
 
 import { AuthContext } from '../lib/Auth';
 
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
+    color: '#FFF',
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
   },
   input: {
     display: 'none',
+  },
+});
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+  typography: {
+    useNextVariants: true,
   },
 });
 
@@ -48,10 +59,12 @@ function HeaderBar (props) {
           <SettingsIcon className={classes.leftIcon} />
           Settings
         </Button>}
-        <Button onClick={logout} variant="contained" color="secondary" className={classes.button}>
-          <PowerSettingsNewIcon className={classes.leftIcon} />
-          Logout
-        </Button>
+        <MuiThemeProvider theme={theme}>
+          <Button onClick={logout} variant="contained" color="primary" className={classes.button}>
+            <PowerSettingsNewIcon className={classes.leftIcon} />
+            Logout
+          </Button>
+        </MuiThemeProvider>
       </div>
     </div>
   )

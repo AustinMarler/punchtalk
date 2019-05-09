@@ -90,10 +90,13 @@ main div {
   height: 62px;
 }
 
+.channel-content-bar {
+  background-color: rgb(156, 255, 160);
+}
+
 #channel-list-container {
   width: 100%;
   height: 100%;
-  background-color: rgb(156, 255, 160);
 }
 
 #channel-content {
@@ -105,7 +108,7 @@ main div {
 }
 
 .channel-content-bar {
-  border-top: 1px solid lightgray;
+  border-top: 2px solid black;
   width: 200px;
   min-width: 200px;
 }
@@ -114,8 +117,7 @@ main div {
   position: relative;
   flex-grow: 1;
   min-width: 600px;
-  border-top: 1px solid lightgray;
-  border-right: 1px solid lightgray;
+  border-top: 2px solid black;
 }
 
 #channel-chat-area-container {

@@ -11,7 +11,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
 import { AuthContext } from "../../lib/Auth"
 
 const styles = theme => ({
@@ -35,7 +36,7 @@ const styles = theme => ({
   },
   avatar: {
     margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: green[500],
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -43,6 +44,16 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
+    color: '#FFF',
+  },
+});
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+  typography: {
+    useNextVariants: true,
   },
 });
 
@@ -103,15 +114,17 @@ function UserLogin(props) {
           </Button>
           <div className="flex-row flex-justify-center margin-top-24px">or</div>
           <div className="welcome-register-button" onClick={() => {props.history.push('/register-user')}}>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submit}
-            >
-              Register
-            </Button>
+            <MuiThemeProvider theme={theme}>
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Register
+              </Button>
+            </MuiThemeProvider>
           </div>
         </form>
       </Paper>

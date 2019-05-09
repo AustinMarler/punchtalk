@@ -4,7 +4,8 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
   main: {
@@ -35,6 +36,16 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
+    color: '#FFF',
+  },
+});
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+  typography: {
+    useNextVariants: true,
   },
 });
 
@@ -70,15 +81,17 @@ function Welcome(props) {
           </div>
           <div className="align-center margin-top-24px">or</div>
           <div className="welcome-register-button" onClick={() => {props.history.push('/register-user')}}>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submit}
-            >
-              Register
-            </Button>
+            <MuiThemeProvider theme={theme}>
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Register
+              </Button>
+            </MuiThemeProvider>
           </div>
         </Paper>
       </main>

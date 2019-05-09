@@ -83,7 +83,7 @@ router.patch('/change-profile-image', (req, res, next) => {
     if (err) {
       throw new Error('profile image change failed')
     } else {
-      const token = jwt.sign({ username, profileImage }, config.get('secret'))
+      const token = jwt.sign({ username, profile_image }, config.get('secret'))
       res.json({
         token
       })

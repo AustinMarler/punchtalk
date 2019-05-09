@@ -17,7 +17,7 @@ function isTokenExpired(token) {
   }
 }
 
-function getUser() {
+export function getUser() {
   try {
     const token = localStorage.getItem('authtoken')
     const decoded = decode(token)
@@ -86,7 +86,39 @@ export const AuthProvider = props => {
       setAuthenticated(false)
       resolve()
     })
-  }
+	}
+	
+	function changeProfilePic(picURL) {
+		return new Promise((resolve, reject) => {
+			axios
+				.patch('/api/change-profile-image', picURL)
+				.then(resp => {
+					const token = resp.data.token
+					axios.defaults.headers.common.Authorization = 'Bearer ' + token
+					window.localStorage.setItem('authtoken', token)
+          setUser(getUser())
+          resolve()
+				})
+				.catch(err => {
+					const error = err.response.data.error
+          reject(error)
+				})
+		})
+	}
+
+	function changePassword(newPass) {
+		return new Promise((resolve, reject) => {
+			axios
+				.patch('/api/change-password', newPass)
+				.then(resp => {
+					resolve()
+				})
+				.catch(err => {
+					const error = err.response.data.error
+					reject(error)
+				})
+		})
+	}
 
   const value = {
     isAuthenticated: isAuthenticated,
@@ -94,7 +126,9 @@ export const AuthProvider = props => {
     redirectUrl: props.redirectUrl || '/user-login',
     signin: signin,
     register: register,
-    signout: signout
+		signout: signout,
+		changeProfilePic: changeProfilePic,
+		changePassword: changePassword
   }
 
   return (

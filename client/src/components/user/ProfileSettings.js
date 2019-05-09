@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
-import { changeProfilePic, changePassword } from '../../actions/user';
 import { AuthContext } from '../../lib/Auth';
 
 import HeaderBar from '../HeaderBar';
@@ -65,6 +64,7 @@ function ProfileSettings (props) {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const { user } = useContext(AuthContext);
+  const { changeProfilePic, changePassword } = useContext(AuthContext);
 
   function handleSubmit (e) {
     e.preventDefault()
